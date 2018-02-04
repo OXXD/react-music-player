@@ -12,6 +12,12 @@ let Player = React.createClass({
             isPlay: true
         }
     },
+    playPrev() {
+        PubSub.publish('PLAY_PREV');
+    },
+    playNext() {
+        PubSub.publish('PLAY_NEXT');
+    },
     componentDidMount() {
         $('#player').bind($.jPlayer.event.timeupdate, (e) => {
             duration = e.jPlayer.status.duration;
@@ -68,9 +74,9 @@ let Player = React.createClass({
                 		</div>
                 		<div className="mt35 row">
                 			<div>
-	                			<i className="icon prev"></i>
+	                			<i className="icon prev" onClick={this.playPrev}></i>
 	                			<i className={`icon ml20 ${this.state.isPlay ? 'pause' : 'play'}`} onClick={this.play}></i>
-	                			<i className="icon next ml20"></i>
+	                			<i className="icon next ml20" onClick={this.playNext}></i>
                 			</div>
                 			<div className="-col-auto">
                 				<i className={`icon repeat-`} ></i>
